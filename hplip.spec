@@ -29,7 +29,7 @@ Url: https://developers.hp.com/hp-linux-imaging-and-printing
 # ./hplip-repack.sh <version>
 #
 
-Source0: hplip-%{version}-repack.tar.gz
+Source0: https://downloads.sourceforge.net/project/hplip/hplip/%{version}/hplip-%{version}.tar.gz
 Source1: hpcups-update-ppds.sh
 Source2: copy-deviceids.py
 Source3: %{name}.appdata.xml
@@ -403,6 +403,9 @@ SANE driver for scanners in HP's multi-function devices (from HPOJ).
 
 %prep
 %setup -q
+
+# Original tarball is used directly (no repack); drop license-problematic file
+rm -f locatedriver
 
 # The pstotiff filter is rubbish so replace it (launchpad #528394).
 %patch -P 1 -p1 -b .pstotiff-is-rubbish
